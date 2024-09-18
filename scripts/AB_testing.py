@@ -79,8 +79,7 @@ class ABHypothesisTesting:
         Visualize a bar chart to show the mean of a numeric metric grouped by a categorical feature.
         :param feature: Categorical feature (e.g., 'Province', 'Gender').
         :param metric: Numeric metric to visualize (e.g., 'TotalClaims', 'ProfitMargin').
-        """
-        plt.figure(figsize=(10, 6))
+        """     plt.figure(figsize=(10, 6))
         group_means = self.data.groupby(feature)[metric].mean().reset_index()
         sns.barplot(x=feature, y=metric, data=group_means)
         plt.title(f'Mean {metric} by {feature}')

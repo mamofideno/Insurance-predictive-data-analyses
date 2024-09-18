@@ -11,9 +11,6 @@ import matplotlib.pyplot as plt
 
 class InsuranceModeling:
     def __init__(self, df):
-        """
-        Initialize with the dataframe.
-        """
         self.data = df
 
     def wrangle_data(self, null_threshold=0.5, low_cardinality_threshold=3, high_cardinality_threshold=1000000):
@@ -71,8 +68,6 @@ class InsuranceModeling:
         self.data['ClaimToPremiumRatio'] = self.data['TotalClaims'] / (self.data['TotalPremium'] + 1e-5)
         self.data['VehiclePowerToWeightRatio'] = self.data['kilowatts'] / (self.data['cubiccapacity'] + 1e-5)
 
-        
-
         return self.data
 
     def encode_categorical_data(self):
@@ -124,7 +119,6 @@ class InsuranceModeling:
             mse = mean_squared_error(y_test, predictions)
             r2 = r2_score(y_test, predictions)
             results[name] = {'MSE': mse, 'R2': r2}
-        
         return results
 
     def analyze_feature_importance(self, model, X_train, feature_names):
@@ -132,13 +126,9 @@ class InsuranceModeling:
         Analyze feature importance using SHAP for tree-based models like XGBoost.
         """
         explainer = shap.Explainer(model)
-        shap_values = explainer(X_train)
-        
+        shap_values = explainer(X_train)        
         # Plot summary
         shap.summary_plot(shap_values, X_train, feature_names=feature_names)
 
         # Show feature importance bar plot
         shap.summary_plot(shap_values, X_train, feature_names=feature_names, plot_type="bar")
-
-    
-    
